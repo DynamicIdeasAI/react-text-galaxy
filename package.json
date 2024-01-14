@@ -1,0 +1,33 @@
+{
+  "name": "react-text-galaxy",
+  "version": "0.8.0",
+  "description": "Text galaxy component based on canvas for React.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DynamicIdeasAI/react-text-galaxy.git"
+  },
+  "keywords": [
+    "text",
+    "galaxy",
+    "spiral"
+  ],
+  "author": "DynamicIdeas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DynamicIdeasAI/react-text-galaxy/issues"
+  },
+  "homepage": "https://github.com/DynamicIdeasAI/react-text-galaxy#readme",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.47",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.3.3"
+  }
+}
