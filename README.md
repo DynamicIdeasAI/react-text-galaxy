@@ -1,6 +1,6 @@
 # React Text Galaxy
 
-This is a text galaxy animation component based on canvas for React.
+This is a text galaxy animation component based on canvas for React. Inspired by Midjourney.
 
 ![Preview](preview-react-text-galaxy.gif)
 
