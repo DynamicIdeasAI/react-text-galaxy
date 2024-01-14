@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { ITextGalaxyProps, ICharacterInfo } from '../type/type'
 
 const spiralAngle = { slow: -0.002, normal: -0.01, fast: -0.05 }
