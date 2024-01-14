@@ -28,18 +28,6 @@ const [text, setText] = useState<string>('');
 
 ### Parameters
 
-```typescript
-text: string
-spiralSpeed?: SpiralSpeedType
-font?: {
-  sizeInPx: number
-  family: string
-  color: string
-}
-background?: { color: string }
-size?: { width: { value: number; unit: SizeUnitType }, height: { value: number, unit: SizeUnitType } }
-```
-
 | Parameter   | Description                   | Default Value                                                           | Data Type                                                                                       | Optional |
 | ----------- | ----------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | -------- |
 | text        | Text content                  | ""                                                                      | string                                                                                          | No       |
