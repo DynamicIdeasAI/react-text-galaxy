@@ -19,7 +19,7 @@ import { TextGalaxy } from 'react-text-galaxy'
 ## Use
 
 ```typescript
-const [text, setText] = useState<string>();
+const [text, setText] = useState<string>('');
 
 <TextGalaxy
   text={text}
