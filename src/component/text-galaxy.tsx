@@ -98,7 +98,7 @@ const TextGalaxy: React.FC<TextGalaxyPropertyDataType> = (params: TextGalaxyProp
   const initiateText = () => {
     let chars = text.split('');
 
-    while (chars.length < MinimalTextLength) chars.concat(chars);
+    while (chars.length < MinimalTextLength) chars = chars.concat(chars);
 
     const { circleCenterX } = getCircleCenterPosition();
     const { sizeInPx: fontSizeInPixel } = font;
