@@ -17,7 +17,7 @@ npm i react-text-galaxy
 ## Import
 
 ```typescript
-import { TextGalaxy } from 'react-text-galaxy';
+import { TextGalaxy, TextMatrix } from 'react-text-galaxy';
 ```
 
 ## Use
