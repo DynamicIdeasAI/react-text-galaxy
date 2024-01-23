@@ -1,17 +1,23 @@
 # React Text Galaxy
 
-This is a text galaxy animation component based on canvas for React. Inspired by Midjourney.
+This is a text galaxy animation component based on canvas for React.
 
-`Text Galaxy`
+`Galaxy`
 ![Text Galaxy Preview](preview/preview-react-text-galaxy.gif)
 
-`Text Matrix`
+`Matrix`
 ![Text Matrix Preview](preview/preview-react-text-matrix.gif)
 
 ## Install
 
 ```bash
 npm i react-text-galaxy
+```
+
+OR
+
+```bash
+yarn add react-text-galaxy
 ```
 
 ## Import
