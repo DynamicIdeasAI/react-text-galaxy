@@ -1,32 +1,31 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import { ITextGalaxyProps, ICharacterInfo } from '../type/type';
+import type { CharacterInfoDataType, TextGalaxyPropertyDataType } from '../type/text-galaxy.type';
+import DeviceHelper from '../helper/device.helper';
+import { MinimalTextLength } from '../constant/common.constant';
 
 const spiralAngle = { slow: -0.002, normal: -0.01, fast: -0.05 };
 
-const TextGalaxy: React.FC<ITextGalaxyProps> = (params: ITextGalaxyProps) => {
+const TextGalaxy: React.FC<TextGalaxyPropertyDataType> = (params: TextGalaxyPropertyDataType) => {
   const {
     text,
     spiralSpeed = 'normal',
     font = { sizeInPx: 14, color: '#4F6A9B', family: 'Arial Black' },
     background = { color: '#081330' },
-    size = { width: { value: 100, unit: '%' }, height: { value: 100, unit: '%' } },
+    size = { width: { value: 100, unit: '%' }, height: { value: 100, unit: '%' } }
   } = params;
 
   const refreshInterval = 50;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const spiralInterval = useRef<NodeJS.Timeout | undefined>(undefined);
 
-  let devicePixelRatio = 1;
-  let characterInfos: ICharacterInfo[] = [];
+  let characterInfos: CharacterInfoDataType[] = [];
   let canvasClientHeight = 0;
   let canvasClientWidth = 0;
   let canvasContext: CanvasRenderingContext2D;
 
   useEffect(() => {
-    devicePixelRatio = window.devicePixelRatio;
-
     const canvas = canvasRef.current as HTMLCanvasElement;
 
     const { height: clientHeight, width: clientWidth } = canvas.getBoundingClientRect();
@@ -54,6 +53,8 @@ const TextGalaxy: React.FC<ITextGalaxyProps> = (params: ITextGalaxyProps) => {
   };
 
   const getCanvas = () => {
+    const devicePixelRatio = DeviceHelper.getDevicePixelRatio();
+
     const canvas = canvasRef.current as HTMLCanvasElement;
     canvas.style.height = `${canvasClientHeight}px`;
     canvas.style.width = `${canvasClientWidth}px`;
@@ -66,6 +67,7 @@ const TextGalaxy: React.FC<ITextGalaxyProps> = (params: ITextGalaxyProps) => {
   const getCanvasContext = () => {
     if (canvasContext) return canvasContext;
 
+    const devicePixelRatio = DeviceHelper.getDevicePixelRatio();
     const canvas = getCanvas();
 
     canvasContext = canvas.getContext('2d') as CanvasRenderingContext2D;
@@ -90,11 +92,14 @@ const TextGalaxy: React.FC<ITextGalaxyProps> = (params: ITextGalaxyProps) => {
 
   const getCircleCenterPosition = () => ({
     circleCenterX: canvasClientWidth / 2,
-    circleCenterY: canvasClientHeight / 2,
+    circleCenterY: canvasClientHeight / 2
   });
 
   const initiateText = () => {
-    const chars = text.split('');
+    let chars = text.split('');
+
+    while (chars.length < MinimalTextLength) chars.concat(chars);
+
     const { circleCenterX } = getCircleCenterPosition();
     const { sizeInPx: fontSizeInPixel } = font;
     const textAreaWidth = Math.min(canvasClientWidth * 0.618, text.length * fontSizeInPixel);
@@ -105,7 +110,7 @@ const TextGalaxy: React.FC<ITextGalaxyProps> = (params: ITextGalaxyProps) => {
     let indexOffset = 0;
     let maxLineLength = textAreaWidth / fontSizeInPixel;
 
-    const infos: ICharacterInfo[] = chars.map((char, index) => {
+    const infos: CharacterInfoDataType[] = chars.map((char, index) => {
       if (index - breakCharacterIndex > lineLength) {
         maxLineLength = Math.max(maxLineLength, index - breakCharacterIndex);
         breakCharacterIndex = index;
@@ -115,7 +120,7 @@ const TextGalaxy: React.FC<ITextGalaxyProps> = (params: ITextGalaxyProps) => {
 
       return {
         value: char,
-        position: { x: (index - breakCharacterIndex + indexOffset) * fontSizeInPixel, y: fontSizeInPixel * lineIndex },
+        position: { x: (index - breakCharacterIndex + indexOffset) * fontSizeInPixel, y: fontSizeInPixel * lineIndex }
       };
     });
 
@@ -124,8 +129,8 @@ const TextGalaxy: React.FC<ITextGalaxyProps> = (params: ITextGalaxyProps) => {
       position: {
         ...info.position,
         x: info.position.x + circleCenterX - (maxLineLength * fontSizeInPixel) / 2,
-        y: info.position.y + (canvasClientHeight - lineIndex * fontSizeInPixel) / 2,
-      },
+        y: info.position.y + (canvasClientHeight - lineIndex * fontSizeInPixel) / 2
+      }
     }));
 
     const canvasContext = getCanvasContext();
@@ -151,7 +156,7 @@ const TextGalaxy: React.FC<ITextGalaxyProps> = (params: ITextGalaxyProps) => {
 
       newCharacters[index] = {
         ...info,
-        position: { x, y },
+        position: { x, y }
       };
 
       characterInfos = newCharacters;
@@ -178,7 +183,7 @@ const TextGalaxy: React.FC<ITextGalaxyProps> = (params: ITextGalaxyProps) => {
 
     return {
       x: radiusX * cosAngle - radiusY * sinAngle + circleCenterX,
-      y: radiusX * sinAngle + radiusY * cosAngle + circleCenterY,
+      y: radiusX * sinAngle + radiusY * cosAngle + circleCenterY
     };
   };
 
@@ -187,7 +192,7 @@ const TextGalaxy: React.FC<ITextGalaxyProps> = (params: ITextGalaxyProps) => {
       ref={canvasRef}
       style={{
         width: `${size.width.value}${size.width.unit}`,
-        height: `${size.height.value}${size.height.unit}`,
+        height: `${size.height.value}${size.height.unit}`
       }}
     />
   );

@@ -2,7 +2,11 @@
 
 This is a text galaxy animation component based on canvas for React. Inspired by Midjourney.
 
-![Preview](preview-react-text-galaxy.gif)
+`Text Galaxy`
+![Text Galaxy Preview](preview/preview-react-text-galaxy.gif)
+
+`Text Matrix`
+![Text Matrix Preview](preview/preview-react-text-matrix.gif)
 
 ## Install
 
@@ -13,7 +17,7 @@ npm i react-text-galaxy
 ## Import
 
 ```typescript
-import { TextGalaxy } from 'react-text-galaxy'
+import { TextGalaxy } from 'react-text-galaxy';
 ```
 
 ## Use
@@ -24,9 +28,15 @@ const [text, setText] = useState<string>("");
 <TextGalaxy
   text={text}
 />
+
+<TextMatrix
+  text={text}
+/>
 ```
 
-### Parameters
+## Parameters
+
+### TextGalaxy
 
 | Parameter   | Description                   | Default Value                                                           | Data Type                                                                                                                                                       | Required |
 | ----------- | ----------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
@@ -35,3 +45,14 @@ const [text, setText] = useState<string>("");
 | font        | Font property of text         | { sizeInPx: 14, color: "#4F6A9B", family: "Arial Black" }               | { sizeInPx: number, family: string, color: string }                                                                                                             | No       |
 | background  | Background property of canvas | { color: "#081330" }                                                    | { color: string }                                                                                                                                               | No       |
 | size        | Size property of canvas       | { width: { value: 100, unit: "%" }, height: { value: 100, unit: "%" } } | { width: { value: number; unit: "px" \| "em" \| "rem" \| "vh" \| "vw" \| "%" }, height: { value: number, unit: "px" \| "em" \| "rem" \| "vh" \| "vw" \| "%" } } | No       |
+
+### TextMatrix
+
+| Parameter    | Description                   | Default Value                                                                                      | Data Type                                                                                                                                                       | Required |
+| ------------ | ----------------------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| text         | Text content                  | ""                                                                                                 | string                                                                                                                                                          | Yes      |
+| fallingSpeed | Animation speed               | "normal"                                                                                           | "slow" \| "normal" \| "fast"                                                                                                                                    | No       |
+| font         | Font property of text         | { sizeInPx: 16, family: "Arial Black" }                                                            | { sizeInPx: number, family: string }                                                                                                                            | No       |
+| textColors   | Colors of text line           | ['rgba(166, 213, 119, 1)', 'rgba(67, 128, 50, 1)', 'rgba(1, 68, 33, 0.8)', 'rgba(1, 50, 32, 0.5)'] | string[]                                                                                                                                                        | No       |
+| background   | Background property of canvas | { color: "#071104" }                                                                               | { color: string }                                                                                                                                               | No       |
+| size         | Size property of canvas       | { width: { value: 100, unit: "%" }, height: { value: 100, unit: "%" } }                            | { width: { value: number; unit: "px" \| "em" \| "rem" \| "vh" \| "vw" \| "%" }, height: { value: number, unit: "px" \| "em" \| "rem" \| "vh" \| "vw" \| "%" } } | No       |

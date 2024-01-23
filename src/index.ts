@@ -1,5 +1,16 @@
-import TextGalaxy from './component/text-galaxy'
-import { ITextGalaxyProps, ICharacterInfo, SpiralSpeedType, SizeUnitType } from './type/type'
+import TextGalaxy from './component/text-galaxy';
+import { TextGalaxyPropertyDataType, CharacterInfoDataType, SpiralSpeedType } from './type/text-galaxy.type';
+import { SizeUnitType } from './type/common.type';
+import TextMatrix from './component/text-matrix';
+import { TextMatrixPropertyDataType, TextLineInfoDataType, FallingSpeedType } from './type/text-matrix.type';
 
-export { TextGalaxy }
-export type { ITextGalaxyProps, ICharacterInfo, SpiralSpeedType, SizeUnitType }
+export { TextGalaxy, TextMatrix };
+export type {
+  TextGalaxyPropertyDataType,
+  CharacterInfoDataType,
+  SpiralSpeedType,
+  SizeUnitType,
+  TextMatrixPropertyDataType,
+  TextLineInfoDataType,
+  FallingSpeedType
+};
