@@ -103,10 +103,7 @@ const TextMatrix: React.FC<TextMatrixPropertyDataType> = (params: TextMatrixProp
     const randomCharIndex =
       Math.floor(Math.random() * (chars.length - randomLineLength - 1)) % (chars.length - randomLineLength - 1);
 
-    const line = text
-      .split('')
-      .slice(randomCharIndex, randomCharIndex + randomLineLength)
-      .join('');
+    const line = chars.slice(randomCharIndex, randomCharIndex + randomLineLength).join('');
 
     const speedOffset = Math.random() * 0.5 * (Math.floor(Math.random() * 100) % 2 ? 1 : -1);
     const speed = speeds[fallingSpeed] + speedOffset;
