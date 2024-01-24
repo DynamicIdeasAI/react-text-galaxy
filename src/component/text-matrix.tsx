@@ -154,14 +154,15 @@ const TextMatrix: React.FC<TextMatrixPropertyDataType> = (params: TextMatrixProp
 
       let nextY = 0;
 
+      const step = Math.floor(
+        Math.max(colors.length - 1, lineInfo.text.length) /
+          Math.min(Math.max(colors.length - 1, 0), lineInfo.text.length)
+      );
+
       for (let charIndex = lineInfo.currentFirstCharIndex; charIndex <= lineInfo.currentLastCharIndex; charIndex++) {
         const char = lineInfo.text[charIndex];
-
-        const step = Math.floor(
-          Math.max(colors.length - 1, lineInfo.text.length) /
-            Math.min(Math.max(colors.length - 1, 0), lineInfo.text.length)
-        );
         const colorIndex = charIndex === 0 ? 0 : Math.floor(charIndex / step) + 1;
+
         nextY = y + (lineInfo.fallingTimes - charIndex) * fontSizeInPixel * lineInfo.speed;
 
         canvasContext.fillStyle = textColors[Math.min(colorIndex, textColors.length - 1)];
