@@ -47,7 +47,7 @@ const TextMatrix: React.FC<TextMatrixPropertyDataType> = (params: TextMatrixProp
 
       fallingInterval.current = setInterval(() => fallText(), refreshInterval);
 
-      initiateTextLines();
+      initTextLines();
     }
 
     return () => {
@@ -55,7 +55,7 @@ const TextMatrix: React.FC<TextMatrixPropertyDataType> = (params: TextMatrixProp
     };
   }, []);
 
-  useEffect(() => initiateTextLines(), [text]);
+  useEffect(() => initTextLines(), [text]);
 
   const removeInterval = () => {
     if (fallingInterval.current !== undefined) clearInterval(fallingInterval.current);
@@ -121,7 +121,7 @@ const TextMatrix: React.FC<TextMatrixPropertyDataType> = (params: TextMatrixProp
     } as TextLineInfoDataType;
   };
 
-  const initiateTextLines = () => {
+  const initTextLines = () => {
     const { sizeInPx: fontSizeInPixel } = font;
     const lineCounts = Math.floor(canvasClientWidth / fontSizeInPixel) * density;
 

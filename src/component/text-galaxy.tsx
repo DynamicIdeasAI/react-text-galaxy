@@ -38,7 +38,7 @@ const TextGalaxy: React.FC<TextGalaxyPropertyDataType> = (params: TextGalaxyProp
 
       spiralInterval.current = setInterval(() => spiralText(), refreshInterval);
 
-      initiateText();
+      initText();
     }
 
     return () => {
@@ -46,7 +46,7 @@ const TextGalaxy: React.FC<TextGalaxyPropertyDataType> = (params: TextGalaxyProp
     };
   }, []);
 
-  useEffect(() => initiateText(), [text]);
+  useEffect(() => initText(), [text]);
 
   const removeInterval = () => {
     if (spiralInterval.current !== undefined) clearInterval(spiralInterval.current);
@@ -95,10 +95,10 @@ const TextGalaxy: React.FC<TextGalaxyPropertyDataType> = (params: TextGalaxyProp
     circleCenterY: canvasClientHeight / 2
   });
 
-  const initiateText = () => {
+  const initText = () => {
     let chars = text.split('');
 
-    while (chars.length < MinimalTextLength) chars = chars.concat(chars);
+    while (chars.length < MinimalTextLength) chars = [...chars, ...chars];
 
     const { circleCenterX } = getCircleCenterPosition();
     const { sizeInPx: fontSizeInPixel } = font;
@@ -146,20 +146,14 @@ const TextGalaxy: React.FC<TextGalaxyPropertyDataType> = (params: TextGalaxyProp
     const canvasContext = getCanvasContext();
     const { color: fontColor } = font;
 
-    characterInfos.forEach((info, index) => {
+    canvasContext.fillStyle = fontColor;
+
+    characterInfos.forEach((info) => {
       const { x, y } = getNewPosition(info.position.x, info.position.y);
 
-      canvasContext.fillStyle = fontColor;
       canvasContext.fillText(info.value, x, y);
 
-      const newCharacters = [...characterInfos];
-
-      newCharacters[index] = {
-        ...info,
-        position: { x, y }
-      };
-
-      characterInfos = newCharacters;
+      info.position = { x, y };
     });
   };
 
