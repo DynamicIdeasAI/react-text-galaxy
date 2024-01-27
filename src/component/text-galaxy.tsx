@@ -6,12 +6,14 @@ import DeviceHelper from '../helper/device.helper';
 import { MinimalTextLength } from '../constant/common.constant';
 
 const spiralAngle = { slow: -0.002, normal: -0.01, fast: -0.05 };
+const colors = ['rgba(166, 213, 119, 1)', 'rgba(67, 128, 50, 1)', 'rgba(1, 68, 33, 0.8)', 'rgba(1, 50, 32, 0.5)'];
 
 const TextGalaxy: React.FC<TextGalaxyPropertyDataType> = (params: TextGalaxyPropertyDataType) => {
   const {
     text,
     spiralSpeed = 'normal',
-    font = { sizeInPx: 14, color: '#4F6A9B', family: 'Arial Black' },
+    font = { sizeInPx: 14, family: 'Arial Black' },
+    textColors = colors,
     background = { color: '#081330' },
     size = { width: { value: 100, unit: '%' }, height: { value: 100, unit: '%' } }
   } = params;
@@ -64,6 +66,8 @@ const TextGalaxy: React.FC<TextGalaxyPropertyDataType> = (params: TextGalaxyProp
     return canvas;
   };
 
+  const getTextColor = (): string => textColors[Math.floor(Math.random() * 100) % textColors.length];
+
   const getCanvasContext = () => {
     if (canvasContext) return canvasContext;
 
@@ -75,9 +79,8 @@ const TextGalaxy: React.FC<TextGalaxyPropertyDataType> = (params: TextGalaxyProp
 
     clearCanvas(canvasContext);
 
-    const { color, sizeInPx: sizeInPixel, family } = font;
+    const { sizeInPx: sizeInPixel, family } = font;
 
-    canvasContext.fillStyle = color;
     canvasContext.font = `${sizeInPixel}px ${family}`;
 
     return canvasContext;
@@ -136,6 +139,7 @@ const TextGalaxy: React.FC<TextGalaxyPropertyDataType> = (params: TextGalaxyProp
     const canvasContext = getCanvasContext();
 
     characterInfos.forEach((text) => {
+      canvasContext.fillStyle = getTextColor();
       canvasContext.fillText(text.value, text.position.x, text.position.y);
     });
   };
@@ -144,13 +148,11 @@ const TextGalaxy: React.FC<TextGalaxyPropertyDataType> = (params: TextGalaxyProp
     clearCanvas();
 
     const canvasContext = getCanvasContext();
-    const { color: fontColor } = font;
-
-    canvasContext.fillStyle = fontColor;
 
     characterInfos.forEach((info) => {
       const { x, y } = getNewPosition(info.position.x, info.position.y);
 
+      canvasContext.fillStyle = getTextColor();
       canvasContext.fillText(info.value, x, y);
 
       info.position = { x, y };

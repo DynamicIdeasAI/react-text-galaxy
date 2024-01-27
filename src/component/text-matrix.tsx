@@ -6,7 +6,7 @@ import type { FallingSpeedType, TextLineInfoDataType, TextMatrixPropertyDataType
 import { MinimalTextLength } from '../constant/common.constant';
 
 const colors = ['rgba(166, 213, 119, 1)', 'rgba(67, 128, 50, 1)', 'rgba(1, 68, 33, 0.8)', 'rgba(1, 50, 32, 0.5)'];
-const speeds: { [key in FallingSpeedType]: number } = { slow: 1.01, normal: 1.2, fast: 1.5 };
+const speeds: { [key in FallingSpeedType]: number } = { slow: 0.6, normal: 1.2, fast: 2 };
 const refreshInterval = 80;
 
 let chars: string[] = [];
@@ -47,7 +47,7 @@ const TextMatrix: React.FC<TextMatrixPropertyDataType> = (params: TextMatrixProp
 
       fallingInterval.current = setInterval(() => fallText(), refreshInterval);
 
-      initTextLines();
+      initiateTextLines();
     }
 
     return () => {
@@ -55,7 +55,7 @@ const TextMatrix: React.FC<TextMatrixPropertyDataType> = (params: TextMatrixProp
     };
   }, []);
 
-  useEffect(() => initTextLines(), [text]);
+  useEffect(() => initiateTextLines(), [text]);
 
   const removeInterval = () => {
     if (fallingInterval.current !== undefined) clearInterval(fallingInterval.current);
@@ -121,7 +121,7 @@ const TextMatrix: React.FC<TextMatrixPropertyDataType> = (params: TextMatrixProp
     } as TextLineInfoDataType;
   };
 
-  const initTextLines = () => {
+  const initiateTextLines = () => {
     const { sizeInPx: fontSizeInPixel } = font;
     const lineCounts = Math.floor(canvasClientWidth / fontSizeInPixel) * density;
 

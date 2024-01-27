@@ -6,8 +6,8 @@ interface TextGalaxyPropertyDataType {
   font?: {
     sizeInPx: number;
     family: string;
-    color: string;
   };
+  textColors?: string[];
   background?: {
     color: string;
   };

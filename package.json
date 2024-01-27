@@ -1,6 +1,6 @@
 {
   "name": "react-text-galaxy",
-  "version": "0.8.14",
+  "version": "0.8.15",
   "description": "Text galaxy component based on canvas for React.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -15,7 +15,7 @@
     "test": "jest --config jestconfig.json",
     "prepare": "npm run build",
     "prepublishOnly": "npm run test && npm run prettier && npm run lint",
-    "pub": "npm version patch && npm publish --access public && git add . && git commit -m 'perf: upgrade package version and publish to npm' && git push && rm -rf dist"
+    "pub": "npm publish --access public && git add . && git commit -m 'perf: upgrade package version and publish to npm' && git push && rm -rf dist"
   },
   "repository": {
     "type": "git",
