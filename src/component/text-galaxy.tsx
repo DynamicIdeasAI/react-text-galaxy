@@ -66,7 +66,8 @@ const TextGalaxy: React.FC<TextGalaxyPropertyDataType> = (params: TextGalaxyProp
     return canvas;
   };
 
-  const getTextColor = (): string => textColors[Math.floor(Math.random() * 100) % textColors.length];
+  const getTextColor = (): string =>
+    textColors.length === 1 ? textColors[0] : textColors[Math.floor(Math.random() * 100) % textColors.length];
 
   const getCanvasContext = () => {
     if (canvasContext) return canvasContext;

@@ -1,7 +1,7 @@
 {
   "name": "react-text-galaxy",
-  "version": "0.8.15",
-  "description": "Text galaxy component based on canvas for React.",
+  "version": "0.8.16",
+  "description": "Text animation components based on canvas for React.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
