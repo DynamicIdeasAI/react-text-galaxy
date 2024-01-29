@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import DeviceHelper from '../helper/device.helper';
+import MathHelper from '../helper/math.helper';
 import { MinimalTextLength } from '../constant/common.constant';
 import type { TextLineInfoDataType, TextMatrixPropertyDataType } from '../type/text-matrix.type';
 import type { SpeedType } from '../type/common.type';
@@ -9,6 +10,7 @@ import type { SpeedType } from '../type/common.type';
 const colors = ['rgba(166, 213, 119, 1)', 'rgba(67, 128, 50, 1)', 'rgba(1, 68, 33, 0.8)', 'rgba(1, 50, 32, 0.5)'];
 const speeds: { [key in SpeedType]: number } = { slow: 0.6, normal: 1.2, fast: 2 };
 const refreshInterval = 80;
+const startOffsetY = 0.618;
 
 let chars: string[] = [];
 
@@ -98,13 +100,10 @@ const TextMatrix: React.FC<TextMatrixPropertyDataType> = (params: TextMatrixProp
   };
 
   const newTextLine = (): TextLineInfoDataType => {
-    const randomLineLength = Math.floor(Math.random() * 100) % 35 || 20;
-    const randomCharIndex =
-      Math.floor(Math.random() * (chars.length - randomLineLength - 1)) % (chars.length - randomLineLength - 1);
-
+    const randomLineLength = MathHelper.getRandomNumber(30);
+    const randomCharIndex = MathHelper.getRandomNumber(chars.length, true);
     const line = chars.slice(randomCharIndex, randomCharIndex + randomLineLength).join('');
-
-    const speedOffset = Math.random() * 0.5 * (Math.floor(Math.random() * 100) % 2 ? 1 : -1);
+    const speedOffset = Math.random() * 0.5 * (MathHelper.getRandomNumber(10) % 2 ? 1 : -1);
     const speed = speeds[fallingSpeed] + speedOffset;
 
     return {
@@ -114,8 +113,8 @@ const TextMatrix: React.FC<TextMatrixPropertyDataType> = (params: TextMatrixProp
       fallingTimes: 0,
       speed,
       startPosition: {
-        x: Math.floor(canvasClientWidth * Math.random()),
-        y: Math.floor(Math.random() * Math.max(canvasClientHeight, 1000)) * 0.618
+        x: MathHelper.getRandomNumber(canvasClientWidth),
+        y: MathHelper.getRandomNumber(canvasClientHeight) * startOffsetY
       }
     } as TextLineInfoDataType;
   };

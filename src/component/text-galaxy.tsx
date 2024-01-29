@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from 'react';
 import type { CharacterInfoDataType, TextGalaxyPropertyDataType } from '../type/text-galaxy.type';
 import DeviceHelper from '../helper/device.helper';
+import MathHelper from '../helper/math.helper';
 import { MinimalTextLength } from '../constant/common.constant';
 
 const spiralAngle = { slow: -0.002, normal: -0.01, fast: -0.05 };
@@ -65,7 +66,7 @@ const TextGalaxy: React.FC<TextGalaxyPropertyDataType> = (params: TextGalaxyProp
   };
 
   const getTextColor = (): string =>
-    textColors.length === 1 ? textColors[0] : textColors[Math.floor(Math.random() * 100) % textColors.length];
+    textColors.length === 1 ? textColors[0] : textColors[MathHelper.getRandomNumber(textColors.length, true)];
 
   const getCanvasContext = () => {
     if (canvasContext) return canvasContext;

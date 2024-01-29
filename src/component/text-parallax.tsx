@@ -4,11 +4,14 @@ import React, { useEffect, useRef } from 'react';
 import DeviceHelper from '../helper/device.helper';
 import type { SpeedType } from '../type/common.type';
 import type { TextParallaxPropertyDataType, WordInfoDataType } from '../type/text-parallax.type';
+import MathHelper from '../helper/math.helper';
 
 const colors = ['rgba(166, 213, 119, 1)', 'rgba(67, 128, 50, 1)', 'rgba(1, 68, 33, 0.8)', 'rgba(1, 50, 32, 0.5)'];
 const speeds: { [key in SpeedType]: number } = { slow: 0.6, normal: 1.2, fast: 2 };
 const refreshInterval = 80;
 const density = 30;
+const maxScaleLevel = 8;
+const maxSpeedOffset = 0.3;
 
 const TextParallax: React.FC<TextParallaxPropertyDataType> = (params: TextParallaxPropertyDataType) => {
   const {
@@ -91,27 +94,26 @@ const TextParallax: React.FC<TextParallaxPropertyDataType> = (params: TextParall
     canvasContext.fillRect(0, 0, canvasClientWidth, canvasClientHeight);
   };
 
-  const newWord = (): WordInfoDataType => {
-    const word = words[Math.floor(Math.random() * words.length)];
-    const scaleLevel = Math.max(Math.floor(Math.random() * 100) % 5, 1);
+  const newWord = (startFromOutside = true): WordInfoDataType => {
+    const word = words[MathHelper.getRandomNumber(words.length, true)];
+    const scaleLevel = MathHelper.getRandomNumber(maxScaleLevel);
     const fontSizeInPx = font.sizeInPx * scaleLevel;
-    const x =
-      movingDirection === 'right-left'
-        ? canvasClientWidth + Math.floor(Math.random() * canvasClientWidth)
-        : -1 * fontSizeInPx * word.length - Math.floor(Math.random() * canvasClientWidth);
+    const x = startFromOutside
+      ? movingDirection === 'right-left'
+        ? canvasClientWidth + MathHelper.getRandomNumber(canvasClientWidth)
+        : -1 * fontSizeInPx * word.length - MathHelper.getRandomNumber(canvasClientWidth)
+      : MathHelper.getRandomNumber(canvasClientWidth);
 
     return {
       text: word,
       speed:
-        Math.floor(speeds[movingSpeed] * (1 / scaleLevel) * 100) / 100 + (Math.floor(Math.random() * 100) % 100) / 1000,
+        Math.floor(speeds[movingSpeed] * (1 / scaleLevel) * 100) / 100 +
+        MathHelper.getRandomNumber(maxSpeedOffset, true),
       fontSizeInPx,
-      color:
-        textColors.length === 1
-          ? textColors[0]
-          : textColors[Math.floor(Math.random() * Math.max(textColors.length, 10)) % (textColors.length - 1)],
+      color: textColors.length === 1 ? textColors[0] : textColors[MathHelper.getRandomNumber(textColors.length, true)],
       position: {
         x,
-        y: Math.floor(canvasClientHeight * Math.random() * 100) / 100
+        y: MathHelper.getRandomNumber(canvasClientHeight, true)
       }
     } as WordInfoDataType;
   };
@@ -119,7 +121,7 @@ const TextParallax: React.FC<TextParallaxPropertyDataType> = (params: TextParall
   const initWords = () => {
     wordInfos = new Array(density).fill(null);
 
-    wordInfos.forEach((_, index) => (wordInfos[index] = newWord()));
+    wordInfos.forEach((_, index) => (wordInfos[index] = newWord(false)));
   };
 
   const moveWords = () => {
