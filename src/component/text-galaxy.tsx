@@ -43,9 +43,7 @@ const TextGalaxy: React.FC<TextGalaxyPropertyDataType> = (params: TextGalaxyProp
       initText();
     }
 
-    return () => {
-      removeInterval();
-    };
+    return () => removeInterval();
   }, []);
 
   useEffect(() => initText(), [text]);

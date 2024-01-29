@@ -2,11 +2,12 @@
 
 import React, { useEffect, useRef } from 'react';
 import DeviceHelper from '../helper/device.helper';
-import type { FallingSpeedType, TextLineInfoDataType, TextMatrixPropertyDataType } from '../type/text-matrix.type';
 import { MinimalTextLength } from '../constant/common.constant';
+import type { TextLineInfoDataType, TextMatrixPropertyDataType } from '../type/text-matrix.type';
+import type { SpeedType } from '../type/common.type';
 
 const colors = ['rgba(166, 213, 119, 1)', 'rgba(67, 128, 50, 1)', 'rgba(1, 68, 33, 0.8)', 'rgba(1, 50, 32, 0.5)'];
-const speeds: { [key in FallingSpeedType]: number } = { slow: 0.6, normal: 1.2, fast: 2 };
+const speeds: { [key in SpeedType]: number } = { slow: 0.6, normal: 1.2, fast: 2 };
 const refreshInterval = 80;
 
 let chars: string[] = [];
@@ -18,7 +19,7 @@ const TextMatrix: React.FC<TextMatrixPropertyDataType> = (params: TextMatrixProp
     font = { sizeInPx: 16, family: 'Arial Black' },
     textColors = colors,
     background = { color: '#071104' },
-    size = { width: { value: 100, unit: '%' }, height: { value: 100, unit: '%' } }
+    size = { width: { value: 100, unit: 'vw' }, height: { value: 100, unit: 'vh' } }
   } = params;
 
   chars = text.split('');
@@ -47,15 +48,13 @@ const TextMatrix: React.FC<TextMatrixPropertyDataType> = (params: TextMatrixProp
 
       fallingInterval.current = setInterval(() => fallText(), refreshInterval);
 
-      initiateTextLines();
+      initTextLines();
     }
 
-    return () => {
-      removeInterval();
-    };
+    return () => removeInterval();
   }, []);
 
-  useEffect(() => initiateTextLines(), [text]);
+  useEffect(() => initTextLines(), [text]);
 
   const removeInterval = () => {
     if (fallingInterval.current !== undefined) clearInterval(fallingInterval.current);
@@ -121,13 +120,13 @@ const TextMatrix: React.FC<TextMatrixPropertyDataType> = (params: TextMatrixProp
     } as TextLineInfoDataType;
   };
 
-  const initiateTextLines = () => {
+  const initTextLines = () => {
     const { sizeInPx: fontSizeInPixel } = font;
     const lineCounts = Math.floor(canvasClientWidth / fontSizeInPixel) * density;
 
     lineInfos = new Array(lineCounts).fill(null);
 
-    for (let index = 0; index < lineCounts; index++) lineInfos[index] = newTextLine();
+    lineInfos.forEach((_, index) => (lineInfos[index] = newTextLine()));
   };
 
   const fallText = () => {

@@ -1,8 +1,8 @@
-import type { SizeUnitType } from './common.type';
+import type { SizeUnitType, SpeedType } from './common.type';
 
 interface TextGalaxyPropertyDataType {
   text: string;
-  spiralSpeed?: SpiralSpeedType;
+  spiralSpeed?: SpeedType;
   font?: {
     sizeInPx: number;
     family: string;
@@ -25,6 +25,4 @@ interface CharacterInfoDataType {
   position: { x: number; y: number };
 }
 
-type SpiralSpeedType = 'slow' | 'normal' | 'fast';
-
-export type { TextGalaxyPropertyDataType, CharacterInfoDataType, SpiralSpeedType };
+export type { TextGalaxyPropertyDataType, CharacterInfoDataType };

@@ -8,6 +8,9 @@ This is a text galaxy animation component based on canvas for React.
 `Matrix`
 ![Text Matrix Preview](preview/preview-react-text-matrix.gif)
 
+`Parallax`
+![Text Parallax Preview](preview/preview-react-text-parallax.gif)
+
 ## Install
 
 ```bash
@@ -23,7 +26,7 @@ yarn add react-text-galaxy
 ## Import
 
 ```typescript
-import { TextGalaxy, TextMatrix } from 'react-text-galaxy';
+import { TextGalaxy, TextMatrix, TextParallax } from 'react-text-galaxy';
 ```
 
 ## Use
@@ -31,13 +34,11 @@ import { TextGalaxy, TextMatrix } from 'react-text-galaxy';
 ```typescript
 const [text, setText] = useState<string>("");
 
-<TextGalaxy
-  text={text}
-/>
+<TextGalaxy text={text} />
 
-<TextMatrix
-  text={text}
-/>
+<TextMatrix text={text} />
+
+<TextParallax text={text} />
 ```
 
 ## Parameters
@@ -47,7 +48,7 @@ const [text, setText] = useState<string>("");
 | Parameter   | Description                   | Default Value                                                                                        | Data Type                                                                                                                                                         | Required |
 | ----------- | ----------------------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | text        | Text content                  | `""`                                                                                                 | string                                                                                                                                                            | Yes      |
-| spiralSpeed | Animation speed               | `"normal"`                                                                                           | `"slow" \| "normal" \| "fast"`                                                                                                                                    | No       |
+| spiralSpeed | Animation speed               | `"normal"`                                                                                           | `SpeedType`                                                                                                                                                       | No       |
 | font        | Font property of text         | `{ sizeInPx: 14, family: "Arial Black" }`                                                            | `{ sizeInPx: number, family: string }`                                                                                                                            | No       |
 | textColors  | Colors of text line           | `['rgba(166, 213, 119, 1)', 'rgba(67, 128, 50, 1)', 'rgba(1, 68, 33, 0.8)', 'rgba(1, 50, 32, 0.5)']` | `string[]`                                                                                                                                                        | No       |
 | background  | Background property of canvas | `{ color: "#081330" }`                                                                               | `{ color: string }`                                                                                                                                               | No       |
@@ -58,8 +59,20 @@ const [text, setText] = useState<string>("");
 | Parameter    | Description                   | Default Value                                                                                        | Data Type                                                                                                                                                         | Required |
 | ------------ | ----------------------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
 | text         | Text content                  | `""`                                                                                                 | string                                                                                                                                                            | Yes      |
-| fallingSpeed | Animation speed               | "normal"                                                                                             | `"slow" \| "normal" \| "fast"`                                                                                                                                    | No       |
+| fallingSpeed | Animation speed               | "normal"                                                                                             | `SpeedType`                                                                                                                                                       | No       |
 | font         | Font property of text         | `{ sizeInPx: 16, family: "Arial Black" }`                                                            | `{ sizeInPx: number, family: string }`                                                                                                                            | No       |
 | textColors   | Colors of text line           | `['rgba(166, 213, 119, 1)', 'rgba(67, 128, 50, 1)', 'rgba(1, 68, 33, 0.8)', 'rgba(1, 50, 32, 0.5)']` | `string[]`                                                                                                                                                        | No       |
 | background   | Background property of canvas | `{ color: "#071104" }`                                                                               | `{ color: string }`                                                                                                                                               | No       |
-| size         | Size property of canvas       | `{ width: { value: 100, unit: "%" }, height: { value: 100, unit: "%" } }`                            | `{ width: { value: number; unit: "px" \| "em" \| "rem" \| "vh" \| "vw" \| "%" }, height: { value: number, unit: "px" \| "em" \| "rem" \| "vh" \| "vw" \| "%" } }` | No       |
+| size         | Size property of canvas       | `{ width: { value: 100, unit: "vw" }, height: { value: 100, unit: "vh" } }`                          | `{ width: { value: number; unit: "px" \| "em" \| "rem" \| "vh" \| "vw" \| "%" }, height: { value: number, unit: "px" \| "em" \| "rem" \| "vh" \| "vw" \| "%" } }` | No       |
+
+### TextParallax
+
+| Parameter       | Description                   | Default Value                                                                                        | Data Type                                                                                                                                                         | Required |
+| --------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| words           | Array of word                 |                                                                                                      | string[]                                                                                                                                                          | Yes      |
+| movingSpeed     | Animation speed               | "normal"                                                                                             | `SpeedType`                                                                                                                                                       | No       |
+| movingDirection | Animation direction           | "right-left"                                                                                         | `DirectionType`                                                                                                                                                   | No       |
+| font            | Font property of text         | `{ sizeInPx: 26, family: "Arial Black" }`                                                            | `{ sizeInPx: number, family: string }`                                                                                                                            | No       |
+| textColors      | Colors of text line           | `['rgba(166, 213, 119, 1)', 'rgba(67, 128, 50, 1)', 'rgba(1, 68, 33, 0.8)', 'rgba(1, 50, 32, 0.5)']` | `string[]`                                                                                                                                                        | No       |
+| background      | Background property of canvas | `{ color: "#071104" }`                                                                               | `{ color: string }`                                                                                                                                               | No       |
+| size            | Size property of canvas       | `{ width: { value: 100, unit: "vw" }, height: { value: 100, unit: "vh" } }`                          | `{ width: { value: number; unit: "px" \| "em" \| "rem" \| "vh" \| "vw" \| "%" }, height: { value: number, unit: "px" \| "em" \| "rem" \| "vh" \| "vw" \| "%" } }` | No       |

@@ -1,8 +1,8 @@
-import type { SizeUnitType } from './common.type';
+import type { SizeUnitType, SpeedType } from './common.type';
 
 interface TextMatrixPropertyDataType {
   text: string;
-  fallingSpeed?: FallingSpeedType;
+  fallingSpeed?: SpeedType;
   font?: {
     sizeInPx: number;
     family: string;
@@ -29,6 +29,4 @@ interface TextLineInfoDataType {
   startPosition: { x: number; y: number };
 }
 
-type FallingSpeedType = 'slow' | 'normal' | 'fast';
-
-export type { TextMatrixPropertyDataType, TextLineInfoDataType, FallingSpeedType };
+export type { TextMatrixPropertyDataType, TextLineInfoDataType };

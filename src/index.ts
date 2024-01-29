@@ -1,16 +1,17 @@
 import TextGalaxy from './component/text-galaxy';
-import { TextGalaxyPropertyDataType, CharacterInfoDataType, SpiralSpeedType } from './type/text-galaxy.type';
-import { SizeUnitType } from './type/common.type';
 import TextMatrix from './component/text-matrix';
-import { TextMatrixPropertyDataType, TextLineInfoDataType, FallingSpeedType } from './type/text-matrix.type';
+import TextParallax from './component/text-parallax';
+import type { TextGalaxyPropertyDataType, CharacterInfoDataType } from './type/text-galaxy.type';
+import type { SizeUnitType, SpeedType, DirectionType } from './type/common.type';
+import type { TextMatrixPropertyDataType, TextLineInfoDataType } from './type/text-matrix.type';
 
-export { TextGalaxy, TextMatrix };
+export { TextGalaxy, TextMatrix, TextParallax };
 export type {
   TextGalaxyPropertyDataType,
   CharacterInfoDataType,
-  SpiralSpeedType,
+  SpeedType,
+  DirectionType,
   SizeUnitType,
   TextMatrixPropertyDataType,
-  TextLineInfoDataType,
-  FallingSpeedType
+  TextLineInfoDataType
 };
